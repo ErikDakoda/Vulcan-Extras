@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Errors, addLogFunction, getUserPayload, addUserFunction } from 'meteor/vulcan:errors';
+import { Errors, addLogFunction, getUserPayload, addUserFunction } from 'meteor/erikdakoda:vulcan-errors';
 import Users from 'meteor/vulcan:users';
 import _isEmpty from 'lodash/isEmpty';
 

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Components, registerComponent, withCurrentUser } from 'meteor/vulcan:core';
 import classNames from 'classnames';
-import { Errors } from 'meteor/vulcan:errors';
+import { Errors } from 'meteor/erikdakoda:vulcan-errors';
 
 
 class ErrorsUserMonitor extends PureComponent {

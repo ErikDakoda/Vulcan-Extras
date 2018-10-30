@@ -1,4 +1,4 @@
-// This is experimental and not actually used by vulcan:errors
+// This is experimental and not actually used by erikdakoda:vulcan-errors
 
 
 // ### ExtendedError

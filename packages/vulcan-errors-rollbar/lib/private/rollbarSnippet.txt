@@ -3,7 +3,7 @@
     accessToken: "POST_CLIENT_ITEM_ACCESS_TOKEN",
     captureUncaught: true,
     captureUnhandledRejections: true,
-    rollbarJsUrl: '/packages/vulcan_errors-rollbar/lib/public/2.4.4/rollbar.js',
+    rollbarJsUrl: '/packages/erikdakoda_vulcan-errors-rollbar/lib/public/2.4.4/rollbar.js',
     payload: {
       environment: "ENVIRONMENT"
     }

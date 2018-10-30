@@ -1,5 +1,5 @@
 import { Head, getSetting } from 'meteor/vulcan:core';
-import { Errors, addInitFunction, getServerHost, scrubFields } from 'meteor/vulcan:errors';
+import { Errors, addInitFunction, getServerHost, scrubFields } from 'meteor/erikdakoda:vulcan-errors';
 import { serverSetting, clientSetting, environmentSetting } from '../modules/settings';
 import Rollbar from 'rollbar';
 
