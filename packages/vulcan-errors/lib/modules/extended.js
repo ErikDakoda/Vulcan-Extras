@@ -1,6 +1,3 @@
-// This is experimental and not actually used by erikdakoda:vulcan-errors
-
-
 // ### ExtendedError
 // From https://github.com/deployable/deployable-errors
 

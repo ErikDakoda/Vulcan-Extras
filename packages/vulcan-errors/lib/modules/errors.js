@@ -3,6 +3,7 @@ import { getSetting } from 'meteor/vulcan:core';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
 import { formatMessage } from 'meteor/vulcan:i18n';
+import RethrownError from './rethrown';
 import _isEmpty from 'lodash/isEmpty';
 import { inspect } from 'util';
 
@@ -152,26 +153,31 @@ export const Errors = {
   currentUser: null,
   
   
-  /*rethrow: function (message, err, details, level = 'error') {
-    err = new RethrownError(message, err, { stack: true, remove: 1 });
-    Errors.log({ err, details, level });
-  },*/
+  wrap: function (message, err) {
+    return new RethrownError(message, err, { stack: true, remove: 1 });
+  },
   
   
   log: function (params) {
-    const { message, err, details, level } = params;
-    processApolloErrors(err);
+    // TODO: We should not mutate params.err; clone it first
+    processApolloErrors(params.err);
+    
+    params.err = params.message && params.err ?
+      Errors.wrap(params.message, params.err) :
+      params.err;
     
     for (const fn of logFunctions) {
       try {
         fn(params);
       } catch (error) {
         // eslint-disable-next-line no-console
-        console.log(`// ${fn.name} ${level} error for '${err && err.message || message}'`);
+        console.log(`// ${fn.name} ${params.level} error for '${params.err && params.err.message || params.message}'`);
         // eslint-disable-next-line no-console
         console.log(error);
       }
     }
+    
+    return params.err;
   },
   
   

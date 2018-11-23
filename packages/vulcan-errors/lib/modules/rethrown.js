@@ -1,9 +1,6 @@
 import ExtendedError from './extended';
 
 
-// This is experimental and not actually used by erikdakoda:vulcan-errors
-
-
 /**
  * Rethrow an error that you caught in your code, adding an additional message, 
  * and preserving the stack trace
