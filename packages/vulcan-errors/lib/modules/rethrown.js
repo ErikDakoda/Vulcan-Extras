@@ -40,7 +40,7 @@ export default class RethrownError extends ExtendedError {
       stack_array = stack_array.slice(0, message_lines + (options.stack || 0));
     }
     
-    //this.original = error;
+    this.original = error;
     this.stack = stack_array.join('\n') + '\n' + error.stack;
   }
   

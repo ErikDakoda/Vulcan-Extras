@@ -162,6 +162,13 @@ export const Errors = {
     // TODO: We should not mutate params.err; clone it first
     processApolloErrors(params.err);
     
+    if (params.err && params.err.data) {
+      if (!params.details) {
+        params.details = {};
+        params.details.errorData = params.err.data;
+      }
+    }
+    
     params.err = params.message && params.err ?
       Errors.wrap(params.message, params.err) :
       params.err;
