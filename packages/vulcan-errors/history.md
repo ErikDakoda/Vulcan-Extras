@@ -1,3 +1,8 @@
+1.12.8_3 / 2019-01-21
+=====================
+
+ * Removed preserving the original error because it results in RangeError: Maximum call stack size exceeded when serializing the object
+ 
 1.12.8_2 / 2019-01-20
 =====================
 

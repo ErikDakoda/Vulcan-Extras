@@ -1,7 +1,7 @@
 Package.describe({
   name: "erikdakoda:vulcan-errors",
   summary: "Vulcan error tracking package",
-  version: '1.12.8_2',
+  version: '1.12.8_3',
   git: "https://github.com/ErikDakoda/Vulcan-Extras.git"
 });
 
