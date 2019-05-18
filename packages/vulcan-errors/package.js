@@ -1,7 +1,7 @@
 Package.describe({
   name: "erikdakoda:vulcan-errors",
   summary: "Vulcan error tracking package",
-  version: '1.12.8_3',
+  version: '1.13.0',
   git: "https://github.com/ErikDakoda/Vulcan-Extras.git"
 });
 
@@ -11,7 +11,8 @@ Package.onUse(function(api) {
   
   api.use([
     'ecmascript',
-    'vulcan:core@1.12.8',
+    'vulcan:core',
+    'vulcan:errors',
   ]);
 
   api.mainModule("lib/server/main.js", "server");

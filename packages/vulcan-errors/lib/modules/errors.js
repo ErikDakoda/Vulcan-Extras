@@ -1,55 +1,13 @@
 import Users from 'meteor/vulcan:users';
-import { getSetting } from 'meteor/vulcan:core';
+import { getSetting, getString } from 'meteor/vulcan:core';
 import get from 'lodash/get';
-import isEqual from 'lodash/isEqual';
-import { formatMessage } from 'meteor/vulcan:i18n';
+import { Errors } from 'meteor/vulcan:errors';
+import { logFunctions } from 'meteor/vulcan:errors';
+// import isEqual from 'lodash/isEqual';
+// import { formatMessage } from 'meteor/vulcan:i18n';
 import RethrownError from './rethrown';
 import _isEmpty from 'lodash/isEmpty';
 import { inspect } from 'util';
-
-
-export const initFunctions = [];
-export const logFunctions = [];
-export const userFunctions = [];
-export const scrubFields = new Set();
-
-
-export const userFields = {
-  id: '_id',
-  email: 'email',
-  username: 'profile.username',
-  isAdmin: 'isAdmin',
-};
-
-
-export const addInitFunction = fn => {
-  initFunctions.push(fn);
-  // execute init function as soon as possible
-  fn();
-};
-
-
-export const addLogFunction = fn => {
-  logFunctions.push(fn);
-};
-
-
-export const addUserFunction = fn => {
-  userFunctions.push(fn);
-};
-
-
-export const addUserFields = fields => {
-  Object.assign(userFields, fields);
-};
-
-
-export const addScrubFields = fields => {
-  fields = Array.isArray(fields) ? fields : [fields];
-  for (const field of fields) {
-    scrubFields.add(field);
-  }
-};
 
 
 export const getUserPayload = function (userOrUserId) {
@@ -84,21 +42,21 @@ export const processApolloErrors = function (err) {
   if (!err) return;
   
   const apolloErrors = err.original && err.original.data && err.original.data.errors ?
-    formatApolloError(err.original, formatMessage, '\n', '  ApolloError: ') :
+    formatApolloError(err.original, getString, '\n', '  ApolloError: ') :
     err.data && err.data.errors ?
-      formatApolloError(err, formatMessage, '\n', '  ApolloError: ') :
+      formatApolloError(err, getString, '\n', '  ApolloError: ') :
       '';
   
   err.message = err.message + '\n' + apolloErrors;
 };
 
 
-export const formatApolloError = (err, formatMessage, separator = ', ', prefix = '') => {
+export const formatApolloError = (err, getString, separator = ', ', prefix = '') => {
   let formatted = '';
   
   const formatProperties = (properties) => {
-    return _isEmpty(properties) ? 
-      '' : 
+    return _isEmpty(properties) ?
+      '' :
       ' ' + inspect(properties);
   };
   
@@ -107,7 +65,7 @@ export const formatApolloError = (err, formatMessage, separator = ', ', prefix =
     
     if (error.id) {
       try {
-        message = formatMessage({ id: error.id }, error.properties);
+        message = getString({ id: error.id, locale: 'en' }, error.properties);
       } catch (err) {
         message = error.id + formatProperties(error.properties);
       }
@@ -147,96 +105,102 @@ export const formatApolloError = (err, formatMessage, separator = ', ', prefix =
 };
 
 
-export const Errors = {
+Errors.wrap = function (message, err) {
+  return new RethrownError(message, err, { stack: true, remove: 1 });
+};
+
+
+
+Errors.log = function (params) {
+  const { message, level = 'error' } = params;
+  const err = params.err || params.error;
+  params.err = err;
+  delete params.error;
   
+  /*processApolloErrors(err);
   
-  currentUser: null,
-  
-  
-  wrap: function (message, err) {
-    return new RethrownError(message, err, { stack: true, remove: 1 });
-  },
-  
-  
-  log: function (params) {
-    // TODO: We should not mutate params.err; clone it first
-    processApolloErrors(params.err);
-    
-    if (params.err && params.err.data) {
-      if (!params.details) {
-        params.details = {};
-        params.details.errorData = params.err.data;
-      }
-    }
-    
-    params.err = params.message && params.err ?
-      Errors.wrap(params.message, params.err) :
-      params.err;
-    
-    for (const fn of logFunctions) {
-      try {
-        fn(params);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log(`// ${fn.name} ${params.level} error for '${params.err && params.err.message || params.message}'`);
-        // eslint-disable-next-line no-console
-        console.log(error);
-      }
-    }
-    
-    return params.err;
-  },
-  
-  
-  debug: function (message, details) {
-    Errors.log({ message, details, level: 'debug' });
-  },
-  
-  
-  info: function (message, details) {
-    Errors.log({ message, details, level: 'info' });
-  },
-  
-  
-  warning: function (message, details) {
-    Errors.log({ message, details, level: 'warning' });
-  },
-  
-  
-  error: function (message, err, details) {
-    Errors.log({ message, err, details, level: 'error' });
-  },
-  
-  
-  critical: function (message, err, details) {
-    Errors.log({ message, err, details, level: 'critical' });
-  },
-  
-  
-  setCurrentUser: function (user) {
-    if (isEqual(this.currentUser, user)) return;
-    
-    for (const fn of userFunctions) {
-      try {
-        fn(user);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log(`// ${fn.name} with ${user && user.email}`);
-        // eslint-disable-next-line no-console
-        console.log(error);
-      }
-    }
-    
-    this.currentUser = user;
-  },
-  
-  
-  getMethodDetails: function (method) {
-    return {
-      userId: method.userId,
-      headers: method.connection && method.connection.httpHeaders
+  if (err && err.data) {
+    if (!params.details) {
+      params.details = {};
+      params.details.errorData = err.data;
     }
   }
   
+  params.err = message && err ?
+    Errors.wrap(message, err) :
+    err;*/
   
+  for (const fn of logFunctions) {
+    try {
+      fn(params);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(`// ${fn.name} ${level} error for '${(err && err.message) || message}'`);
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  }
+};
+
+
+/*Errors.log = function (params) {
+  // TODO: We should not mutate params.err; clone it first
+  processApolloErrors(params.err);
+  
+  if (params.err && params.err.data) {
+    if (!params.details) {
+      params.details = {};
+      params.details.errorData = params.err.data;
+    }
+  }
+  
+  params.err = params.message && params.err ?
+    Errors.wrap(params.message, params.err) :
+    params.err;
+  
+  for (const fn of logFunctions) {
+    try {
+      fn(params);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(`// ${fn.name} ${params.level} error for '${params.err && params.err.message || params.message}'`);
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  }
+  
+  return params.err;
+};
+
+
+Errors.debug = function (message, details) {
+  Errors.log({ message, details, level: 'debug' });
+};
+
+
+Errors.info = function (message, details) {
+  Errors.log({ message, details, level: 'info' });
+};
+
+
+Errors.warning = function (message, details) {
+  Errors.log({ message, details, level: 'warning' });
+};
+
+
+Errors.error = function (message, err, details) {
+  Errors.log({ message, err, details, level: 'error' });
+};
+
+
+Errors.critical = function (message, err, details) {
+  Errors.log({ message, err, details, level: 'critical' });
+};*/
+
+
+Errors.getMethodDetails = function (method) {
+  return {
+    userId: method.userId,
+    headers: method.connection && method.connection.httpHeaders
+  };
 };

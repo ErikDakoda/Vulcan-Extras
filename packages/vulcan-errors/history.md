@@ -1,3 +1,8 @@
+1.13.0 / 2019-05-05
+===================
+
+ * This package is now based on vulcan:errors and only adds extra functionality
+ 
 1.12.8_3 / 2019-01-21
 =====================
 

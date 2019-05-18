@@ -19,13 +19,13 @@ Uncaught errors will be sent to Rollbar.
 You can send caught errors to Rollbar like this:
 
 ```
-import { Errors } from 'meteor/erikdakoda:vulcan-errors';
+import { Errors } from 'meteor/vulcan:errors';
 
 async function doSomething (param1, param2) {
   try {
     . . .
-  } catch (error) {
-    Errors.error('function doSomething failed', error, { param1, param2 });
+  } catch (err) {
+    Errors.error({ message: 'function doSomething failed', err, details: { param1, param2 } });
   }
 }
 ```

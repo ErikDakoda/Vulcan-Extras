@@ -1,7 +1,7 @@
 Package.describe({
   name: 'erikdakoda:vulcan-errors-rollbar',
   summary: 'Vulcan Rollbar error tracking package',
-  version: '1.12.8',
+  version: '1.13.0',
   git: 'https://github.com/ErikDakoda/Vulcan-Extras.git'
 });
 
@@ -11,9 +11,9 @@ Package.onUse(function(api) {
   
   api.use([
     'ecmascript',
-    'vulcan:core@1.12.8',
-    'vulcan:users@1.12.8',
-    'erikdakoda:vulcan-errors@1.12.8',
+    'vulcan:core',
+    'vulcan:users',
+    'erikdakoda:vulcan-errors',
   ]);
   
   api.addAssets('lib/private/rollbarSnippet.txt', 'server');
