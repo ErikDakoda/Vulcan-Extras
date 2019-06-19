@@ -29,12 +29,18 @@ export const getUserPayload = function (userOrUserId) {
 };
 
 
-export const getServerHost = function () {
-  return process.env.GALAXY_CONTAINER_ID
+export const getServerHost = function (long) {
+  let serverHost = process.env.GALAXY_CONTAINER_ID
     ?
     process.env.GALAXY_CONTAINER_ID.split('-')[1]
     :
-    getSetting('public.environment');
+    process.env.HOST_NAME;
+  
+  serverHost = getSetting('public.environment') + '_' + serverHost;
+  
+  if (long) serverHost = getSetting('public.hostPrefix') + '_' + serverHost;
+  
+  return serverHost;
 };
 
 
@@ -110,25 +116,26 @@ Errors.wrap = function (message, err) {
 };
 
 
-
 Errors.log = function (params) {
   const { message, level = 'error' } = params;
   const err = params.err || params.error;
   params.err = err;
   delete params.error;
   
-  /*processApolloErrors(err);
+  processApolloErrors(err);
   
+  // Send error data in details
   if (err && err.data) {
     if (!params.details) {
       params.details = {};
-      params.details.errorData = err.data;
     }
+    params.details.errorData = err.data;
   }
   
+  // If both message and error object are provided, wrap the error in message
   params.err = message && err ?
     Errors.wrap(message, err) :
-    err;*/
+    err;
   
   for (const fn of logFunctions) {
     try {
