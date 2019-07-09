@@ -1,3 +1,9 @@
+1.13.0_2 / 2019-06-28
+=====================
+
+ * Committed .idea to the repository
+ * Hard coded Vulcan version number
+ 
 1.13.0_1 / 2019-06-19
 =====================
 
