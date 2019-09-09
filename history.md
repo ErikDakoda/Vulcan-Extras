@@ -1,3 +1,9 @@
+1.13.2 / 2019-09-08
+=====================
+
+ * Upgraded to version 1.13.2
+ * Moved getUserPayload to vulcan:errors
+ 
 1.13.1 / 2019-08-14
 =====================
 

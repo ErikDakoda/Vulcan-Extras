@@ -1,32 +1,9 @@
-import Users from 'meteor/vulcan:users';
 import { getSetting, getString } from 'meteor/vulcan:core';
-import get from 'lodash/get';
 import { Errors } from 'meteor/vulcan:errors';
 import { logFunctions } from 'meteor/vulcan:errors';
-// import isEqual from 'lodash/isEqual';
-// import { formatMessage } from 'meteor/vulcan:i18n';
 import RethrownError from './rethrown';
 import _isEmpty from 'lodash/isEmpty';
 import { inspect } from 'util';
-
-
-export const getUserPayload = function (userOrUserId) {
-  try {
-    const user = Users.getUser(userOrUserId);
-    if (!user) return null;
-    
-    const userPayload = {};
-    
-    for (const field in userFields) {
-      const path = userFields[field];
-      userPayload[field] = get(user, path);
-    }
-    
-    return userPayload;
-  } catch (error) {
-    return null;
-  }
-};
 
 
 export const getServerHost = function (long) {
