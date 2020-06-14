@@ -14,11 +14,10 @@ Package.onUse(function(api) {
     'ecmascript',
     'vulcan:core@1.15.1',
     'vulcan:users@1.15.1',
-    'erikdakoda:vulcan-errors',
+    'erikdakoda:vulcan-errors@1.15.1',
   ]);
   
   api.addAssets('lib/private/rollbarSnippet.txt', 'server');
-  api.addAssets('lib/public/2.4.4/rollbar.js', 'client');
   
   api.mainModule('lib/server/main.js', 'server');
   api.mainModule('lib/client/main.js', 'client');
