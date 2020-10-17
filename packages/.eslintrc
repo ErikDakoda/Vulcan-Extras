@@ -1,0 +1,113 @@
+{
+  "extends": [
+    //"airbnb",
+    "eslint:recommended",
+    "plugin:meteor/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:cypress/recommended"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "allowImportExportEverywhere": true,
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "babel/generator-star-spacing": 0,
+    "babel/new-cap": [1, {
+      "capIsNewExceptions": [
+        "Optional",
+        "OneOf",
+        "Maybe",
+        "MailChimpAPI",
+        "Juice",
+        "Run",
+        "AppComposer",
+        "Query",
+        "InArray"
+      ]
+    }],
+    "babel/array-bracket-spacing": 0,
+    "babel/object-curly-spacing": 0,
+    "babel/object-shorthand": 0,
+    "babel/arrow-parens": 0,
+    "babel/no-await-in-loop": 1,
+    "comma-dangle": 0,
+    "key-spacing": 0,
+    "meteor/audit-argument-checks": 0,
+    "meteor/no-session": 0,
+    "no-case-declarations": 0,
+    "no-console": 0,
+    "no-extra-boolean-cast": 0,
+    "no-undef": 1,
+    "no-unused-vars": [1, {
+      "vars": "all",
+      "args": "none",
+      "varsIgnorePattern": "React|PropTypes|Component"
+    }],
+    "react/jsx-indent-props": ["error", "first"],
+    "react/display-name": 1,
+    "react/prop-types": "off",
+    "semi": [1, "always"],
+    "arrow-parens": "off",
+    "indent": ["off", 2, {
+      "FunctionDeclaration": {"parameters": "first"},
+      "FunctionExpression": {"parameters": "first"},
+      "VariableDeclarator": "first",
+      "ObjectExpression": "first"
+    }],
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxBOF": 0, "maxEOF": 0 }],
+    "no-trailing-spaces": ["error", { 
+      "skipBlankLines": true,
+      "ignoreComments": true
+    }],
+    "function-paren-newline": ["error", "consistent"],
+    "react/jsx-first-prop-new-line": ["error", "never"],
+    "react/forbid-prop-types": "off",
+    "react/jsx-tag-spacing": ["error", {
+      "closingSlash": "never",
+      "beforeSelfClosing": "never",
+      "afterOpening": "never",
+      "beforeClosing": "never"
+    }]
+  },
+  "env": {
+    "es6": true,
+    "commonjs": true,
+    "browser": true,
+    "node": true,
+    "meteor": true,
+    "mocha": true
+  },
+  "plugins": [
+    "babel",
+    "meteor",
+    "react",
+    "jsx-a11y",
+    "mocha",
+    "optimize-regex"
+  ],
+  "settings": {
+    "import/resolver": {
+      "meteor": {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ],
+        "moduleDirectory": [
+          "node_modules",
+          "packages"
+        ]
+      }
+    }
+  },
+  "root": true,
+  "globals": {
+    "param": true,
+    "returns": true
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "name": "vulcan-extras",
+  "version": "1.16.1",
+  "description": "Extra functionality for Vulcan.js projects",
+  "author": "Erik Dakoda",
+  "private": false,
+  "git": "https://github.com/ErikDakoda/Vulcan-Extras",
+  "dependencies": {
+    "@apollo/client": "3.2.4",
+    "@babel/runtime": "7.11.2",
+    "lodash": "4.17.20",
+    "meteor-node-stubs": "1.0.1",
+    "rollbar": "2.19.4"
+  },
+  "devDependencies": {
+    "@2fd/graphdoc": "2.4.0",
+    "@babel/plugin-syntax-dynamic-import": "7.8.3",
+    "@storybook/addon-actions": "5.0.8",
+    "@storybook/addon-knobs": "5.0.8",
+    "@storybook/addon-links": "5.0.1",
+    "@storybook/addons": "5.0.1",
+    "@storybook/react": "5.0.8",
+    "@storybook/theming": "5.0.8",
+    "babel-eslint": "10.1.0",
+    "babel-plugin-istanbul": "5.2.0",
+    "babel-runtime": "6.26.0",
+    "enzyme": "3.11.0",
+    "eslint": "7.11.0",
+    "eslint-config-airbnb": "18.2.0",
+    "eslint-config-meteor": "0.1.1",
+    "eslint-import-resolver-meteor": "0.4.0",
+    "eslint-plugin-babel": "5.3.1",
+    "eslint-plugin-chai-expect": "2.2.0",
+    "eslint-plugin-cypress": "2.11.2",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jsx-a11y": "6.3.1",
+    "eslint-plugin-meteor": "7.2.1",
+    "eslint-plugin-mocha": "8.0.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-optimize-regex": "1.2.0",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-react": "7.21.4",
+    "eslint-plugin-react-hooks": "4.1.2",
+    "eslint-plugin-react-i18n": "1.0.3",
+    "eslint-plugin-standard": "4.0.1",
+    "expect": "26.5.3",
+    "hint": "6.1.0",
+    "jest-extended": "0.11.5",
+    "jsdoc": "3.6.6",
+    "jsdom-global": "3.0.2",
+    "minami": "1.2.3",
+    "sinon": "6.3.5",
+    "storybook-addon-intl": "2.4.1",
+    "storybook-react-router": "1.0.8",
+    "supertest": "4.0.2",
+    "waait": "1.0.5",
+    "webpack": "4.44.1"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {
+        "browsers": [
+          "last 2 versions"
+        ]
+      }
+    }
+  }
+}
