@@ -12,6 +12,7 @@ import {
   multiOutputTemplate,
   fieldFilterInputTemplate,
   fieldSortInputTemplate,
+  multiQueryType,
 } from 'meteor/vulcan:core';
 import stringify from 'json-stringify-safe';
 
@@ -66,9 +67,9 @@ export const registerAggregateQuery = function (params) {
   const schema = schemas.join('\n');
   GraphQLSchema.addSchema(schema);
 
-  addGraphQLQuery(`${typeName}(input: ${multiInputType(typeName)}): ${multiOutputType(typeName)}`);
+  addGraphQLQuery(`${multiQueryType(typeName)}(input: ${multiInputType(typeName)}): ${multiOutputType(typeName)}`);
   addGraphQLResolvers({ Query: {
-      [typeName]: aggregate.resolver.bind(aggregate)
+      [multiQueryType(typeName)]: aggregate.resolver.bind(aggregate)
     }
   });
 

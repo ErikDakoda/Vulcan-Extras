@@ -1,2 +1,1 @@
-export * from './aggregate';
-export * from './graphql-templates';
+export * from './multi2';
