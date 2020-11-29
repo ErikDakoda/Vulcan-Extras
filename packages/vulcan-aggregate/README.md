@@ -1,4 +1,4 @@
-# erikdakoda:vulcan-aggregate 1.16.1
+# erikdakoda:vulcan-aggregate 1.16.0
 
 This is a Meteor package designed as an addon to [Vulcan.js](https://github.com/VulcanJS/Vulcan).
 It's created and maintained by [Erik Dakoda](https://github.com/ErikDakoda) and is available on GitHub in 
