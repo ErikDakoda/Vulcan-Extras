@@ -1,6 +1,6 @@
-import { Head, getSetting } from 'meteor/vulcan:core';
+import { getSetting } from 'meteor/vulcan:core';
 import { Errors, addInitFunction, scrubFields } from 'meteor/vulcan:errors';
-import { serverSetting, clientSetting, environmentSetting } from '../modules/settings';
+import { serverSetting, environmentSetting } from '../modules/settings';
 import { getServerHost } from 'meteor/erikdakoda:vulcan-errors';
 import Rollbar from 'rollbar';
 
@@ -21,6 +21,8 @@ const initRollbarForNode = () => {
     captureUncaught: true,
     captureUnhandledRejections: true,
     verbose: true,
+    locals: true,
+    nodeSourceMaps: true,
   });
   
   Errors.rollbar.configure({
@@ -34,23 +36,3 @@ const initRollbarForNode = () => {
   });
 };
 addInitFunction(initRollbarForNode);
-
-
-const initRollbarForBrowser = () => {
-  console.log('initRollbarForBrowser');
-  const postClientItemAccessToken = getSetting(clientSetting);
-  const environment = getSetting(environmentSetting) || 'development';
-  
-  if (!postClientItemAccessToken) {
-    console.log(`Rollbar for Browser was not installed because the setting ${clientSetting} is not defined`);
-    return;
-  }
-  
-  const rollbarSnippet = Assets.getText('lib/private/rollbarSnippet.txt')
-  .replace('POST_CLIENT_ITEM_ACCESS_TOKEN', postClientItemAccessToken).replace('ENVIRONMENT', environment);
-  
-  Head.script.push({
-    contents: rollbarSnippet,
-  });
-};
-addInitFunction(initRollbarForBrowser);

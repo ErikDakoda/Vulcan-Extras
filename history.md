@@ -1,3 +1,8 @@
+1.16.0_1 / 2021-02-03
+=====================
+
+ * Fixed bug: Client-side errors not captured by Rollbar [Pulse](https://qeebi.monday.com/boards/228275158/pulses/1019241922)
+ 
 1.13.2 / 2019-09-08
 =====================
 

@@ -40,9 +40,6 @@ export const registerAggregateQuery = function (params) {
 
       const { results, totalCount } = await aggregation(name, input, context);
 
-      // prime the cache
-      //results.forEach(doc => Suppliers.loader.prime(doc._id, doc));
-
       debug(`\x1b[33m=> ${results.length} of ${totalCount} documents returned\x1b[0m`);
       debugGroupEnd();
       debug(`------------- end \x1b[35m${name}\x1b[0m resolver -------------`);
