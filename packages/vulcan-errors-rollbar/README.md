@@ -33,9 +33,9 @@ async function doSomething (param1, param2) {
 You can also log any info to Rollbar:
 
 ```
-Errors.debug(message, details);
-Errors.info(message, details);
-Errors.warning(message, details);
+Errors.debug({ message, details });
+Errors.info({ message, details });
+Errors.warning({ message, details });
 ```
 
 ## User monitoring

@@ -21,7 +21,7 @@ const initRollbarForNode = () => {
     captureUncaught: true,
     captureUnhandledRejections: true,
     verbose: true,
-    locals: true,
+    //locals: true,
     nodeSourceMaps: true,
   });
   
