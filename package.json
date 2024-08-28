@@ -54,7 +54,7 @@
     "storybook-react-router": "1.0.8",
     "supertest": "4.0.2",
     "waait": "1.0.5",
-    "webpack": "4.44.1"
+    "webpack": "5.94.0"
   },
   "postcss": {
     "plugins": {
